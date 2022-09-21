@@ -41,9 +41,14 @@ namespace SW2URDF.URDF
             description = new Description(name);
 
             dependencies = new Dependencies(
-                new string[] { "catkin" },
+                new string[] { "ament_cmake" },
                 new string[] {
-                    "roslaunch", "robot_state_publisher", "rviz", "joint_state_publisher_gui", "gazebo" });
+                    "joint_state_publisher_gui",
+                    "launch",
+                    "launch_ros",
+                    "robot_state_publisher",
+                    "urdf",
+                    "xacro" });
 
             author = new Author("TODO");
 
@@ -55,7 +60,7 @@ namespace SW2URDF.URDF
             XmlWriter writer = mWriter.writer;
             writer.WriteStartDocument();
             writer.WriteStartElement("package");
-            writer.WriteAttributeString("format", "2");
+            writer.WriteAttributeString("format", "3");
 
             description.WriteElement(writer);
 
@@ -65,7 +70,8 @@ namespace SW2URDF.URDF
 
             writer.WriteStartElement("export");
 
-            writer.WriteStartElement("architecture_independent");
+            writer.WriteStartElement("build_type");
+            writer.WriteString("ament_cmake");
             writer.WriteEndElement();
 
             writer.WriteEndElement();
