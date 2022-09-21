@@ -14,7 +14,7 @@ namespace SW2URDF.URDF
             {
                 Encoding = new UTF8Encoding(false),
                 Indent = true,
-                NewLineOnAttributes = true,
+                NewLineOnAttributes = false,
             };
             writer = XmlWriter.Create(savePath, settings);
         }
