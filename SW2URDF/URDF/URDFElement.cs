@@ -25,6 +25,8 @@ namespace SW2URDF.URDF
 
         [DataMember]
         protected readonly string ElementName;
+        protected readonly string Prefix;
+        protected readonly string NameSpace = "http://www.ros.org/wiki/xacro";
 
         [DataMember]
         protected bool required;
@@ -37,9 +39,10 @@ namespace SW2URDF.URDF
             set => ExtensionDataValue = value;
         }
 
-        public URDFElement(string elementName, bool required)
+        public URDFElement(string elementName, bool required, string prefix="")
         {
             ElementName = elementName;
+            Prefix = prefix;
             this.required = required;
             ChildElements = new List<URDFElement>();
             Attributes = new List<URDFAttribute>();
@@ -67,7 +70,15 @@ namespace SW2URDF.URDF
                 return;
             }
 
-            writer.WriteStartElement(ElementName);
+            if (Prefix.Length == 0)
+            {
+                writer.WriteStartElement(ElementName);
+            }
+            else
+            {
+                writer.WriteStartElement(Prefix, ElementName, NameSpace);
+            }
+            
             foreach (URDFAttribute attribute in Attributes)
             {
                 if (attribute.Value != null)

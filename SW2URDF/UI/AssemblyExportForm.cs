@@ -263,7 +263,7 @@ namespace SW2URDF.UI
             Exporter.URDFRobot = CreateRobotFromTreeView(treeViewLinkProperties);
 
             // The UI should prevent these sorts of errors, but just in case
-            string errors = CheckLinksForErrors(Exporter.URDFRobot.BaseLink);
+            string errors = CheckLinksForErrors(Exporter.URDFRobot.Macro.BaseLink);
             if (!string.IsNullOrWhiteSpace(errors))
             {
                 logger.Info("Link errors encountered:\n " + errors);
@@ -274,7 +274,7 @@ namespace SW2URDF.UI
                 return;
             }
 
-            string warnings = CheckLinksForWarnings(Exporter.URDFRobot.BaseLink);
+            string warnings = CheckLinksForWarnings(Exporter.URDFRobot.Macro.BaseLink);
 
             if (!string.IsNullOrWhiteSpace(warnings))
             {

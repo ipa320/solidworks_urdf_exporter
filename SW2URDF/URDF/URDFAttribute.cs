@@ -24,11 +24,16 @@ namespace SW2URDF.URDF
         [DataMember]
         public object Value;
 
-        public URDFAttribute(string type, bool isRequired, object initialValue)
+        protected readonly string NameSpace = "http://www.ros.org/wiki/xacro";
+
+        private readonly string Prefix;
+
+        public URDFAttribute(string type, bool isRequired, object initialValue, string prefix = "")
         {
             AttributeType = type;
             IsRequired = isRequired;
             Value = initialValue;
+            Prefix = prefix;
         }
 
         public void WriteURDF(XmlWriter writer)
@@ -67,7 +72,15 @@ namespace SW2URDF.URDF
             }
             if (Value != null)
             {
-                writer.WriteAttributeString(AttributeType, valueString);
+                if (Prefix.Length == 0)
+                {
+                    writer.WriteAttributeString(AttributeType, valueString);
+                }
+                else
+                {
+                    writer.WriteAttributeString(AttributeType, Prefix, null, valueString);
+                }
+                
             }
         }
 

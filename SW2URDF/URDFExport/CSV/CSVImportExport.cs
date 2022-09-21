@@ -34,7 +34,7 @@ namespace SW2URDF.URDFExport.CSV
             {
                 CsvWriter writer = new CsvWriter(stream);
                 WriteHeaderToCSV(writer);
-                WriteLinkToCSV(writer, robot.BaseLink);
+                WriteLinkToCSV(writer, robot.Macro.BaseLink);
             }
         }
 

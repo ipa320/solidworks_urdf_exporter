@@ -145,7 +145,7 @@ namespace SW2URDF.URDFExport
         {
             //Setting up the progress bar
             logger.Info("Beginning the export process");
-            int progressBarBound = CommonSwOperations.GetCount(URDFRobot.BaseLink);
+            int progressBarBound = CommonSwOperations.GetCount(URDFRobot.Macro.BaseLink);
             iSwApp.GetUserProgressBar(out progressBar);
             progressBar.Start(0, progressBarBound, "Creating package directories");
 
@@ -202,7 +202,7 @@ namespace SW2URDF.URDFExport
             try
             {
                 logger.Info("Beginning individual files export");
-                ExportFiles(URDFRobot.BaseLink, package, 0, exportSTL);
+                ExportFiles(URDFRobot.Macro.BaseLink, package, 0, exportSTL);
                 success = true;
             }
             catch (Exception e)
@@ -244,7 +244,7 @@ namespace SW2URDF.URDFExport
             List<string> jointNames = new List<string>();
 
             Queue<Link> queue = new Queue<Link>();
-            queue.Enqueue(URDFRobot.BaseLink);
+            queue.Enqueue(URDFRobot.Macro.BaseLink);
             while (queue.Count > 0)
             {
                 Link current = queue.Dequeue();
